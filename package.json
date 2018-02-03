@@ -1,0 +1,22 @@
+{
+  "name": "kubernetesalexaapp",
+  "version": "1.0.0",
+  "description": "",
+  "main": "kube-api-interace.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rachelcarandang/KubernetesAlexaApp.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/rachelcarandang/KubernetesAlexaApp/issues"
+  },
+  "homepage": "https://github.com/rachelcarandang/KubernetesAlexaApp#readme",
+  "dependencies": {
+    "node-kubernetes-client": "^0.3.2"
+  }
+}
