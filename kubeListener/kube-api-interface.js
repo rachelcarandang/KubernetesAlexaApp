@@ -20,6 +20,9 @@ const services = new KubeWatch('services', {
   url: localUrl,
 });
 
+// const google = new GoogleCloudMessaging();
+// google.sendNotificationToDevice();
+
 services
   .on('added', event => {
     console.log('Service created with event:', event);
@@ -28,15 +31,9 @@ services
     // do something...
   })
   .on('deleted', event => {
-    // ..do something else..
     console.log('Service deleted with event:', event);
     const google = new GoogleCloudMessaging();
     google.sendNotificationToDevice();
-    // const { name }  = event.metadata;
-    // const { app } = event.meta.data.labels;
-    // Example Alexa notfication:
-    // "Your <name> service for your <app> application has gone down!"
-    // send GCM push
   })
   .on('error', err => {
     console.error('Error:', err);

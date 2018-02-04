@@ -53,6 +53,15 @@ app.intent('AMAZON.HelpIntent', {
   response.shouldEndSession(false)
 })
 
+app.intent('FirstIntent', {
+  'slots': {},
+  'utterances': []
+}, function (request, response) {
+  var helpOutput = 'The voice assistant has detected that a service has gone down. What would you like to do?';
+  response.say(helpOutput);
+  response.shouldEndSession(false)
+})
+
 app.intent('DoNothingIntent', {
   'slots': {},
   'utterances': []

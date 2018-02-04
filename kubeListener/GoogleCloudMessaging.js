@@ -2,8 +2,8 @@
 
 const request = require('request');
 
-const GLOBAL_TOKEN = 'd4KY1K5Mhjo:APA91bFnBWYq_TUtBilYJbulaQuKY_1Uw2dm6TpEtNNWguvOB1yGJ28IZeJytVBx4Nreq0Aom2jZmP7RzOKeO7V3mxCzNU4Fxxwi-wlgG7_m0-Vtk60zAJ5hyARNE_406-3tO1_wcWpz';
-
+const GLOBAL_TOKEN = 'eYd5l8ZC9FU:APA91bGSI4LO8rIL9P2JseV95Gth-wWtGgszgYuOlecl9Wvs8ZT11NWmiy-lu0NlhqRjm5qlTIEfekkglfG_MB7iGCAlOblNTsBXSIB0BoYps88Z3ZQR14eVWHtffXYiqMoAuwgP2rib';
+const AUDIO_URL = 'http://soundbible.com/grab.php?id=2192&type=mp3';
 function GoogleCloudMessaging(options) {
   this.sendNotificationEndpoint =
     'https://gcm-http.googleapis.com/gcm/send';
@@ -15,7 +15,7 @@ GoogleCloudMessaging.prototype.sendNotificationToDevice =
   function sendNotificationToDevice() {
     console.log('Sending notification to device through Google Cloud Messaging...');
 
-    return this._send("");
+    return this._send(AUDIO_URL);
   }
 
 /**
