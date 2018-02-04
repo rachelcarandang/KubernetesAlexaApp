@@ -1,11 +1,13 @@
 /*
-1. Make sure the proxy is running with: $ kubectl proxy --port=8080 (this can be done after other steps,
+1. Follow steps https://cloud.google.com/kubernetes-engine/docs/tutorials/guestbook tools installed and cluster created
+   (up until Step 1: Set up a Redis master, then follow the below)
+2. Make sure the proxy is running with: $ kubectl proxy --port=8080 (this can be done after other steps,
    but make sure it's done before running this file)
-2. Run the cluster with: $ gcloud container clusters create guestbook --num-nodes=3
-3. Deploy the yaml with: $ kubectl create -f guestbook-all-in-one.yaml
-4. Delete the frontend service with: $ kubectl delete service frontend
-5. The on deleted event will fire below
-6. To manually restart the frontend service, run: $ kubectl create -f guestbook-all-in-one.yaml
+3. Run the cluster with: $ gcloud container clusters create guestbook --num-nodes=3
+4. Deploy the yaml with: $ kubectl create -f guestbook-all-in-one.yaml
+5. Delete the frontend service with: $ kubectl delete service frontend
+6. The on deleted event will fire below
+7. To manually restart the frontend service, run: $ kubectl create -f guestbook-all-in-one.yaml
 
 */
 
