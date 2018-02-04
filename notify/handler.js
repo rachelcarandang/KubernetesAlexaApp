@@ -2,8 +2,7 @@
 
 const request = require('request');
 const Twilio = require('twilio');
-const HttpResponse = require('./../common/HttpResponse');
-
+// const HttpResponse = require('./../common/HttpResponse');
 
 module.exports.notifyPhone = (event, context) => {
 
@@ -12,10 +11,10 @@ module.exports.notifyPhone = (event, context) => {
 
   console.log(`Calling phone number`);
   // TODO: remove
-  context.succeed("");
-  // notifier.callPhoneNumber()
-  //   .then(response => context.succeed(new HttpResponse.OK(response)))
-  //   .catch(error => context.succeed(new HttpResponse.BadRequest(error)));
+  // context.succeed("");
+  notifier.callPhoneNumber()
+    .then(response => context.succeed("OK"))
+    .catch(error => context.succeed("Bad request " + error));
 
   // const requestBody = JSON.parse(event.body);
 };
@@ -27,8 +26,8 @@ module.exports.notifySlack = (event, context) => {
 
   console.log(`Sending slack request`);
   notifier.sendSlackNotification()
-    .then(response => context.succeed(new HttpResponse.OK(response)))
-    .catch(error => context.succeed(new HttpResponse.BadRequest(error)));
+    .then(response => context.succeed("OK"))
+    .catch(error => context.succeed("Bad request " + error));
 };
 
 function Notifier() {
@@ -53,12 +52,12 @@ Notifier.prototype.sendSlackNotification= function () {
 
   return new Promise((resolve, reject) => {
     request(requestContent, (error, response, body) => {
-      if (error) {
-        reject(error);
-      } else {
-        console.log('Success sending slack request!');
-        resolve(body);
-      }
+        if (error) {
+          reject(error);
+        } else {
+          console.log('Success sending slack request!');
+          resolve(body);
+        }
     });
   });
 };

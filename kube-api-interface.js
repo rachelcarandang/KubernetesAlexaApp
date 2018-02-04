@@ -12,8 +12,6 @@
 */
 
 
-
-
 const KubeWatch = require('kube-watch').default;
 
 const localUrl = 'http://localhost:8080';

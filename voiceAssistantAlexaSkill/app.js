@@ -2,6 +2,41 @@ var Alexa = require('alexa-app')
 var request = require('request');
 
 var app = new Alexa.app('app') // eslint-disable-line
+BASE_ENDPOINT = 'https://8hfk3xw4l9.execute-api.us-west-2.amazonaws.com/dev'
+ENDPOINT_NOTIFY_PHONE = BASE_ENDPOINT + "/notifyPhone";
+ENDPOINT_NOTIFY_SLACK = BASE_ENDPOINT + "/notifySlack";
+
+function createPostRequest(endpoint, payload) {
+  const headers = {
+    'Content-Type': 'application/json',
+  };
+
+  return {
+    headers,
+    method: 'POST',
+    uri: endpoint,
+    json: payload,
+  };
+}
+
+function sendRequest(req) {
+  request(req, (error, response, body) => {
+    if (error) {
+      console.log("Error sending request " + error);
+    } else {
+      console.log('Success sending request! ' + response);
+    }
+  });
+}
+function notifyPhone() {
+  const req = createPostRequest(ENDPOINT_NOTIFY_PHONE, {});
+  sendRequest(req);
+}
+
+function notifySlack() {
+  const req = createPostRequest(ENDPOINT_NOTIFY_SLACK, {});
+  sendRequest(req);
+}
 
 app.launch(function (request, response) {
   var launchOutput = 'Welcome to Your Skill.  The purpose of this skill is...  To start using the skill, say Alexa, ask ....'
@@ -40,6 +75,7 @@ app.intent('PhoneIntent', {
   'slots': {},
   'utterances': []
 }, function (request, response) {
+  notifyPhone();
   var helpOutput = 'Excellent, I have called Rachel. I couldn’t help noticing that the last time you responded to a fire, you also notified your entire development team with Slack. Would you like the voice assistant to notify the entire team via Slack?';
   response.say(helpOutput);
   response.shouldEndSession(false)
@@ -49,6 +85,7 @@ app.intent('SlackIntent', {
   'slots': {},
   'utterances': []
 }, function (request, response) {
+  notifySlack();
   var helpOutput = 'Excellent. I have notified your team of what happened in Slack.';
   response.say(helpOutput);
   response.shouldEndSession(false)
@@ -86,5 +123,6 @@ app.intent('SampleIntent', {
   var output = 'Hi there'
   response.say(output).send()
 })
+
 
 module.exports = app
