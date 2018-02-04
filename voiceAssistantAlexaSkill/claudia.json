@@ -1,0 +1,7 @@
+{
+  "lambda": {
+    "role": "kubernetes-fire-fighter-voice-assistant-executor",
+    "name": "kubernetes-fire-fighter-voice-assistant",
+    "region": "us-east-1"
+  }
+}
