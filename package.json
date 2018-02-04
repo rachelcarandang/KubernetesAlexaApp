@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/rachelcarandang/KubernetesAlexaApp#readme",
   "dependencies": {
+    "moment": "^2.20.1",
     "node-kubernetes-client": "^0.3.2"
   },
   "devDependencies": {
