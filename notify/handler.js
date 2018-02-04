@@ -1,34 +1,26 @@
 'use strict';
 
 const request = require('request');
+const Twilio = require('twilio');
 const HttpResponse = require('./../common/HttpResponse');
 
 module.exports.notify = (event, context) => {
 
   console.log(`Notify Endpoint Hit`);
-
   const notifier = new Notifier();
 
   console.log(`Sending slack request`);
-
   notifier.sendSlackNotification()
     .then(response => context.succeed(new HttpResponse.OK(response)))
     .catch(error => context.succeed(new HttpResponse.BadRequest(error)));
 
 
+  console.log(`Calling phone number`);
+  notifier.callPhoneNumber()
+    .then(response => context.succeed(new HttpResponse.OK(response)))
+    .catch(error => context.succeed(new HttpResponse.BadRequest(error)));
+
   // const requestBody = JSON.parse(event.body);
-
-  // const deviceToken = requestBody.deviceToken;
-
-  // console.log("notified console log statement");
-  // const response = {
-  //   message: 'foo!'
-  // };
-  //
-  //
-  // context.succeed(new HttpResponse.OK(response));
-
-
 };
 
 function Notifier() {
@@ -36,6 +28,12 @@ function Notifier() {
 
   this.slackNotificationText = "Urgent: A pod for your Application has gone down. @CTOAdam has sent the following message:"
        + "Just replaced with a new pod via Alexa. Monitor while I come into work.";
+
+  this.twilioAccountSid = 'ACf462775f5b8046e929b2940a9bf3e486';
+  this.twilioAuthToken = 'b33ea767d56c11a7ecb39786e9cbeda2';
+
+  this.toPhoneNumber = "6094807422";
+  this.fromPhoneNumber = "2159774815";
 }
 
 /**
@@ -58,6 +56,24 @@ Notifier.prototype.sendSlackNotification= function () {
   });
 };
 
+Notifier.prototype.callPhoneNumber = function() {
+  return new Promise((resolve, reject) => {
+    const client = new Twilio(this.twilioAccountSid, this.twilioAuthToken);
+
+    client.api.calls
+      .create({
+        url: 'https://demo.twilio.com/welcome/voice/',
+        to: `+1${this.toPhoneNumber}`,
+        from: `+1${this.fromPhoneNumber}`,
+      })
+      .then(call => {
+        console.log('Success calling phone number!');
+        resolve(call);
+      })
+      .catch(error => reject(error));
+  });
+};
+
 Notifier.prototype.createPostRequest = function (endpoint, payload) {
   const headers = {
     'Content-Type': 'application/json',
@@ -70,3 +86,4 @@ Notifier.prototype.createPostRequest = function (endpoint, payload) {
     json: payload,
   };
 };
+

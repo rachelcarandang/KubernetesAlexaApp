@@ -18,5 +18,8 @@
   "homepage": "https://github.com/rachelcarandang/KubernetesAlexaApp#readme",
   "dependencies": {
     "node-kubernetes-client": "^0.3.2"
+  },
+  "devDependencies": {
+    "twilio": "^3.11.2"
   }
 }
