@@ -20,6 +20,7 @@
     "node-kubernetes-client": "^0.3.2"
   },
   "devDependencies": {
+    "kube-watch": "^0.5.4",
     "twilio": "^3.11.2"
   }
 }
