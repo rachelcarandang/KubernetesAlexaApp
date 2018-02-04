@@ -9,16 +9,16 @@ module.exports.notify = (event, context) => {
   console.log(`Notify Endpoint Hit`);
   const notifier = new Notifier();
 
-  console.log(`Sending slack request`);
-  notifier.sendSlackNotification()
-    .then(response => context.succeed(new HttpResponse.OK(response)))
-    .catch(error => context.succeed(new HttpResponse.BadRequest(error)));
-
-
-  console.log(`Calling phone number`);
-  notifier.callPhoneNumber()
-    .then(response => context.succeed(new HttpResponse.OK(response)))
-    .catch(error => context.succeed(new HttpResponse.BadRequest(error)));
+  // console.log(`Sending slack request`);
+  // notifier.sendSlackNotification()
+  //   .then(response => context.succeed(new HttpResponse.OK(response)))
+  //   .catch(error => context.succeed(new HttpResponse.BadRequest(error)));
+  //
+  //
+  // console.log(`Calling phone number`);
+  // notifier.callPhoneNumber()
+  //   .then(response => context.succeed(new HttpResponse.OK(response)))
+  //   .catch(error => context.succeed(new HttpResponse.BadRequest(error)));
 
   // const requestBody = JSON.parse(event.body);
 };
