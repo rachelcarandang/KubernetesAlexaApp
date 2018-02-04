@@ -31,6 +31,10 @@ services
   .on('deleted', event => {
     // ..do something else..
     console.log('Service deleted with event:', event);
+    const { name }  = event.metadata;
+    const { app } = event.meta.data.labels;
+    // Example Alexa notfication:
+    // "Your <name> service for your <app> application has gone down!"
 
   })
   .on('error', err => {
