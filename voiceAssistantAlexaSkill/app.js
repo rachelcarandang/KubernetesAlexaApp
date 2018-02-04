@@ -49,12 +49,12 @@ app.intent('SlackIntent', {
   'slots': {},
   'utterances': []
 }, function (request, response) {
-  var helpOutput = 'Excellent. I have notified your team in Slack.';
+  var helpOutput = 'Excellent. I have notified your team of what happened in Slack.';
   response.say(helpOutput);
   response.shouldEndSession(false)
 })
 
-app.intent('SlackIntent', {
+app.intent('ThanksIntent', {
   'slots': {},
   'utterances': []
 }, function (request, response) {

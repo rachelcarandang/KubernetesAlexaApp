@@ -71,11 +71,18 @@
            path: pollKube
            method: post
            integration: lambda-proxy
-   notify:
-     handler: notify/handler.notify
+   notifyPhone:
+     handler: notify/handler.notifyPhone
      events:
        - http:
-           path: notify
+           path: notifyPhone
+           method: post
+           integration: lambda-proxy
+   notifySlack:
+     handler: notify/handler.notifySlack
+     events:
+       - http:
+           path: notifySlack
            method: post
            integration: lambda-proxy
 
