@@ -11,7 +11,7 @@
 
 */
 
-
+const request = require('request');
 const KubeWatch = require('kube-watch').default;
 
 const localUrl = 'http://localhost:8080';
@@ -29,11 +29,11 @@ services
   .on('deleted', event => {
     // ..do something else..
     console.log('Service deleted with event:', event);
-    const { name }  = event.metadata;
-    const { app } = event.meta.data.labels;
+    // const { name }  = event.metadata;
+    // const { app } = event.meta.data.labels;
     // Example Alexa notfication:
     // "Your <name> service for your <app> application has gone down!"
-
+    // send GCM push
   })
   .on('error', err => {
     console.error('Error:', err);
