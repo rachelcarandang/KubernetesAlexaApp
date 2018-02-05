@@ -14,6 +14,8 @@
 const request = require('request');
 const KubeWatch = require('kube-watch').default;
 const GoogleCloudMessaging = require('./GoogleCloudMessaging');
+const moment = require('moment');
+
 
 const localUrl = 'http://localhost:8080';
 const services = new KubeWatch('services', {
@@ -32,6 +34,7 @@ services
   })
   .on('deleted', event => {
     console.log('Service deleted with event:', event);
+    // send GCM push
     const google = new GoogleCloudMessaging();
     google.sendNotificationToDevice();
   })
